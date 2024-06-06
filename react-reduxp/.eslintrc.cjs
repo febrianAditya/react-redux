@@ -13,6 +13,7 @@ module.exports = {
   plugins: ['react-refresh'],
   rules: {
     'react/jsx-no-target-blank': 'off',
+    "no-underscore-dangle": ["error", { "allow": [_id, b_codes_id] }],
     'react-refresh/only-export-components': [
       'warn',
       { allowConstantExport: true },

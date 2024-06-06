@@ -1,9 +1,12 @@
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
+import logger from "redux-logger";
+import { thunk } from "redux-thunk";
 
 const initialState = {
     name: "febrian",
     age: 28,
-    address: "Jakarta"
+    address: "Jakarta",
+    dataUser: []
 }
 
 function reducer(state=initialState, action) {
@@ -18,12 +21,15 @@ function reducer(state=initialState, action) {
         return {...state, events: action.payload}
     }else if(action.type === "GANTI_NAMA") {
         return {...state, name: action.payload}
-    }else{
+    }else if (action.type === "GET_USER") {
+        return {...state, dataUser: action.payload}
+    }
+    else{
         return state
     }
 }
 
 
-const store = createStore(reducer)
+const store = createStore(reducer, applyMiddleware(thunk, logger))
 
 export default store
